@@ -5,10 +5,8 @@ class ProductPage(BasePage):
     def add_to_basket(self):
         add_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
         add_button.click()
-        #self.solve_quiz_and_get_code()
-        # Решаем quiz ТОЛЬКО если есть промо-параметр в URL
-        if "promo" in self.browser.current_url:
-            self.solve_quiz_and_get_code()
+        self.solve_quiz_and_get_code()
+        
     
     def should_be_product_added_message(self):
         assert self.is_element_present(*ProductPageLocators.PRODUCT_ADDED_MESSAGE), \
