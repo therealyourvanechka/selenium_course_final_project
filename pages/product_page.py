@@ -5,7 +5,12 @@ class ProductPage(BasePage):
     def add_to_basket(self):
         add_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
         add_button.click()
-        self.solve_quiz_and_get_code()
+        # Пытаемся решить quiz только если он есть
+        try:
+            self.solve_quiz_and_get_code()
+        except:
+            # Если алерта нет - просто продолжаем
+            pass
         
     
     def should_be_product_added_message(self):
@@ -36,3 +41,5 @@ class ProductPage(BasePage):
         """Проверяет, что сообщение о добавлении товара в корзину ИСЧЕЗЛО"""
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
             "Сообщение об успехе не исчезло, но должно было"
+        
+
